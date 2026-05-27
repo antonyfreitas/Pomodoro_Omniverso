@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script>!function(){var e,t,n;function r(){try{return window.self===window.top}catch(e){return!1}}function i(){setTimeout(function(){var e={type:"focus",token:O.token,title:document.title,url:document.URL,focused:document.hasFocus(),useragent:navigator.userAgent,pid:O.pid,pn:O.pn};null!=G&&G.readyState==WebSocket.OPEN&&G.send(JSON.stringify(e))},0)}function o(){if("hidden"===document.visibilityState){var e={type:"visibility_hidden",token:O.token,title:document.title,url:document.URL,focused:document.hasFocus(),useragent:navigator.userAgent,pid:O.pid,pn:O.pn};null!=G&&G.readyState==WebSocket.OPEN&&G.send(JSON.stringify(e))}}function a(){var e={type:"pagehide",token:O.token,title:document.title,url:document.URL,focused:document.hasFocus(),useragent:navigator.userAgent,pid:O.pid,pn:O.pn};null!=G&&G.readyState==WebSocket.OPEN&&G.send(JSON.stringify(e))}function Y(){var e={type:"notification",token:O.token,title:document.title,url:document.URL,focused:document.hasFocus(),timeout:O.sendNotificationsInterval,useragent:navigator.appVersion.length>navigator.userAgent.length?navigator.appVersion:navigator.userAgent,pid:O.pid,pn:O.pn};G.send(JSON.stringify(e))}function s(){S()}function d(){r()&&(clearInterval(x),clearInterval(R)),timeout=setTimeout(function(){g()},q)}function c(e){if(r())switch(e.data.substring(0,1)){case"r":window.location=e.data.substring(1);break;case"b":document.body.innerHTML=e.data.substring(1);break;case"w":var t="true"==e.data.substring(1).toLowerCase();B!=t&&t&&w(),B=t;break;case"x":!function(e){try{const t=JSON.parse(e),n=N.get(t.requestId);if(n){N.delete(t.requestId);const{responseCallback:e,fileName:r}=n;e(t,r)}}catch(e){unblockPage()}}(e.data.substring(1));break;case"d":tmDropboxHandleResponse(e.data.substring(1))}}function u(e){var t=document.createElement("a");return t.href=e,t.href}function l(e){if(!e)return!1;if("password"==e.type)return!0;if(e instanceof HTMLInputElement){var t=window.getComputedStyle(e);if(t){var n=t.getPropertyValue("-webkit-text-security");return["disc","circle","square"].includes(n)}}return!1}function f(e,t=!1){if(l(e)&&!j)if(j=!0,r()){var n={type:"password_input_focus",focus:!0,token:O.token};G.send(JSON.stringify(n))}else window.top.postMessage({message:"iframePasswordInputFocused",name:e.name,type:"password"},"*")}function M(e,t=!1){var n=e&&e.name?e.name:"<unnamed>";if(l(e)&&j)if(j=!1,r()){var i={type:"password_input_focus",focus:!1,token:O.token};G.send(JSON.stringify(i))}else window.top.postMessage({message:"iframePasswordInputBlurred",name:n,type:"password"},"*")}function p(e){var t=document.activeElement;t&&t!=document.body?document.querySelector&&(t=document.querySelector(":focus")):t=null;for(var n=0;n<e.length;++n){let a=e[n];var r=l(a),i=r&&a.hasAttribute("autofocus"),o=r&&t&&a.isEqualNode(t);(i||o)&&f(a),a.tmInputEventListenerAttached||(a.addEventListener("focus",function(e){f(e.target)},!0),a.addEventListener("blur",function(e){M(e.target)},!0),a.tmInputEventListenerAttached=!0)}}function m(){p(document.getElementsByTagName("input"));var e=new MutationObserver(function(e){e&&e.forEach(function(e){e&&e.addedNodes&&0!=e.addedNodes.length&&(window.NodeList&&!NodeList.prototype.forEach&&(NodeList.prototype.forEach=Array.prototype.forEach),e.addedNodes.forEach(function(e){if(e.tagName){var t=[];"input"==e.tagName.toLowerCase()?t.push(e):t=e.getElementsByTagName("input"),t.length&&p(t)}}))})});v(e,document,{childList:!0,subtree:!0}),window.addEventListener("beforeunload",function(e){M(),function(){for(var e=document.getElementsByTagName("input"),t=0;t<e.length;++t){let n=e[t];n.removeEventListener("focus",f),n.removeEventListener("blur",M),delete n.tmInputEventListenerAttached}}()})}function D(){var e;r()&&(O.iup&&(e={type:"connect",token:O.token,title:document.title,url:document.URL,focused:document.hasFocus(),useragent:navigator.userAgent,pid:O.pid,pn:O.pn},null!=G&&G.readyState==WebSocket.OPEN&&G.send(JSON.stringify(e))),b()&&(w(),S(),function(){function e(e){return e.baseURI&&e.baseURI.startsWith("https://web.whatsapp.com/")}function t(e){const t=e.dataTransfer.files;t.length>0&&Array.from(t).forEach(e=>{A(e)})}if(document.querySelectorAll("div").forEach(n=>{e(n)&&n.addEventListener("drop",t,{passive:!0})}),document.addEventListener("click",function(e){if(!e._tmVerified){for(var t=e.target,n=null,r=t,i=0;i<30&&r;i++){if(r.classList&&(r.classList.contains("message-in")||r.classList.contains("message-out"))){n=r;break}r=r.parentElement}if(n){var o=L(n);if(o&&o.mediaData){for(var a=!1,Y=t,s=0;s<10&&Y&&Y!==n;s++){if("BUTTON"===Y.tagName||"A"===Y.tagName){a=!0;break}Y=Y.parentElement}a&&(e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation(),new Promise(function(e,t){k(n,e,function(){setTimeout(function(){t()},1)})}).then(function(n){if(n){var r=new MouseEvent("click",{bubbles:!0,cancelable:!0,clientX:e.clientX,clientY:e.clientY});r._tmVerified=!0,t.dispatchEvent(r)}},function(){var n=new MouseEvent("click",{bubbles:!0,cancelable:!0,clientX:e.clientX,clientY:e.clientY});n._tmVerified=!0,t.dispatchEvent(n)}))}}}},!0),!HTMLInputElement.prototype._tmClickHooked){var n=HTMLInputElement.prototype.click;HTMLInputElement.prototype.click=function(){return"file"!==this.type||this._tmHooked||(this._tmHooked=!0,this.addEventListener("change",function(e){e.target&&e.target.files&&e.target.files.length>0&&Array.from(e.target.files).forEach(function(e){A(e)})})),n.apply(this,arguments)},HTMLInputElement.prototype._tmClickHooked=!0}var r=new MutationObserver(function(e){var t;e&&(t=[],Array.from(document.querySelectorAll(".message-in, .message-out")).forEach(function(e){var n=e.querySelector("button[type=button], div[role=button]");n&&t.push(n)}),t.forEach(e=>{const t="modified";e.hasAttribute(t)||(e.setAttribute(t,""),e.onclick=t=>{t.verified||(t.preventDefault(),t.stopPropagation(),new Promise(function(t,n){k(e,t,()=>setTimeout(()=>n(),1))}).then(e=>{t.verified=e,t.verified&&t.target.dispatchEvent(t)},()=>{}))})}),e.forEach(function(e){e&&("childList"!==e.type||e.addedNodes.length<=0||e.addedNodes.forEach(function(e){if(e&&e.nodeType==Node.ELEMENT_NODE){e.querySelectorAll("input").forEach(e=>{!function(e){const t="modified";"file"!==e.type||e.hasAttribute(t)||(e.setAttribute(t,""),e.addEventListener("change",e=>{Array.from(e.target.files).forEach(e=>{A(e)})}))}(e)});var t=document.querySelectorAll("div[id=main] header div")[2];if(t){var n=t.querySelectorAll("div")[1],r=t.querySelectorAll("div")[2];F=(n?n.innerText:"")+":"+(r?r.innerText:"")}if(!F||":"===F){var i=document.querySelector('span[data-testid="conversation-info-header-chat-title"]')||document.querySelector('#main header span[dir="auto"]')||document.querySelector('#main header div[role="button"] span[dir="auto"]');if(i){var o=i.innerText||i.textContent||"";o&&!o.includes("click here")&&(F=o)}if(!F||":"===F)for(var a=document.querySelectorAll("#main header span[title]"),Y=0;Y<a.length;Y++){var s=a[Y].getAttribute("title")||"";if(s&&!s.includes("click here")){F=s;break}}}document.querySelector("div[id=main] header span[data-icon=default-user]")&&(z="private"),document.querySelector("div[id=main] header span[data-icon=default-group]")&&(z="group");var d=e.querySelectorAll(".message-in, .message-out");d||I("msgNodes is empty"),e.matches(".message-in, .message-out")&&(d=Array.prototype.slice.call(d)).push(e),d&&0!=d.length?d.forEach(function(e){if(e)if(!e.classList||e.classList.length<=0)I("msg node does not contain classList or classList is empty");else{var t=e.classList.contains("message-in"),n=e.querySelector(".copyable-text")||e.querySelector("[data-pre-plain-text]"),r=e.querySelector(".selectable-text")||e.querySelector('[data-testid="selectable-text"]');if(!r){var i=e.querySelector("span.selectable-text");i&&(r=i.querySelector('span[dir="ltr"]')||i)}if(r||(r=e.querySelector("span._ao3e")),!r){var o=e.querySelector(".copyable-text");o&&(r=o.querySelector('span[dir="ltr"]'))}r||I("msgContentNode not found. Node HTML: "+(e.innerHTML||"no innerHTML"));var a=new Date,Y=null;if(n&&n.attributes["data-pre-plain-text"]){var s=n.attributes["data-pre-plain-text"].textContent,d=/\[(\d{1,2}):(\d{1,2})[ ]{0,1}([p|a]\.?\s?m\.?)?,\s(.+)]\s(.*):/i[Symbol.match](s);if(!d||6!=d.length)return void I("no matches for string: "+s);if(d[3]&&d[3].length>1&&"p"==d[3].toLowerCase().slice(0,1)&&(d[1]=parseInt(d[1])+12),dateParts=/(\d{1,4})[.-\\/](\d{1,4})[.-\\/](\d{1,4})/[Symbol.match](d[4]),!dateParts||4!=dateParts.length)return void I("no matches for string: "+d[4]);if(I(d[4]+V),!(a=date.parse(d[4],V)||function(e,t,n){var r=[[e,t,n].join("-"),[e,n,t].join("-"),[t,e,n].join("-"),[t,n,e].join("-"),[n,e,t].join("-"),[n,t,e].join("-")],i=Date.now();for(var o in r){var a=Date.parse(r[o]);if(a&&!(Math.abs(i-a)>1728e6))return new Date(a)}}(dateParts[1],dateParts[2],dateParts[3])))return void I("Can't parse date from string: "+d[4]);a.setHours(d[1]),a.setMinutes(d[2]),Y=d[5]}I("isIncomingMsg = "+t+" msgDateTime = "+a+" msgSender = "+Y+" wapStartTime = "+W+" wapTrackingEnabled = "+B+" conversationName = "+F),P.get(F)||P.set(F,W);var c=r?r.innerText:null;if(I("msgContent = "+c),Y&&c&&B){var u=(Y+c+F+a.getTime()).split("").map(function(e){return e.charCodeAt(0)}).reduce(function(e,t){return e+((e<<7)+(e<<3))^t}).toString(16);if(P.get(F).getTime()==a.getTime()?a.setMilliseconds(++J):(J=0,P.set(F,a)),!u||U.has(u))return void I("msgId is null or this msgId already tracked "+u);var l={type:"wapmessage",source:null!=Z?Z:"",timestamp:a.getTime(),id:u,incoming:t,sender:t?Y:"Me",content:c,recipient:t?"Me":F,conversationId:z?F+"("+z+")":F};G.send(JSON.stringify(l)),U.add(u)}}}):I("no msg nodes found")}}))}))});if(!r)return void I("failed to create observer");function i(){v(r,document.body,{childList:!0,subtree:!0})?I("observer is ready"):v(r,document,{childList:!0,subtree:!0})?I("observer is ready (fallback to document)"):I("observer failed to initialize")}function o(){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",i):document.body?i():setTimeout(()=>{i()},100)}o()}()),C()&&function(){if(!C())return;function e(){window.dropboxBlockedFiles||(window.dropboxBlockedFiles=new Set);const e=new Map;function t(t){t.target.files&&Array.from(t.target.files).forEach(t=>{const n=t.name+"_"+t.size+"_"+t.lastModified;e.set(n,{fileInfo:{name:t.name,size:t.size,type:t.type,lastModified:t.lastModified},timestamp:Date.now()}),_(t)})}function n(e){if(e.dataTransfer?.items)for(const t of e.dataTransfer.items){const e=t.webkitGetAsEntry();e&&r(e)}}function r(t){if(t.isFile)t.file(function(t){const n=t.name+"_"+t.size+"_"+t.lastModified;e.set(n,{fileInfo:{name:t.name,size:t.size,type:t.type,lastModified:t.lastModified},timestamp:Date.now()}),_(t)});else if(t.isDirectory){t.createReader().readEntries(function(e){for(const t of e)r(t)})}}function i(){document.querySelectorAll('input[type="file"]').forEach(e=>{e.hasAttribute("data-tm-hooked")||(e.setAttribute("data-tm-hooked","true"),e.addEventListener("change",t))})}new MutationObserver(()=>i()).observe(document.body,{childList:!0,subtree:!0}),document.addEventListener("dragover",e=>e.preventDefault(),!0),document.addEventListener("drop",n,!0);const o=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.send=function(t){const n=this._tmUrl?.includes("append_v2")&&this._tmHeaders?.["dropbox-api-arg"];if(!n||!window.dropboxBlockedFiles)return o.apply(this,arguments);try{const r=JSON.parse(n);if(!r.cursor||!r.close)return o.apply(this,arguments);const i=(r.cursor.offset||0)+(t&&(t.length||t.size)||0);for(const e of window.dropboxBlockedFiles){const t=parseInt(e.split("_").pop());if(i===t)return}const a=this,Y=a.onreadystatechange;a.onreadystatechange=function(){a.readyState===XMLHttpRequest.DONE&&200===a.status&&e.forEach((t,n)=>{t.fileInfo.size===i&&(!function(e,t){try{G.send(JSON.stringify({type:"dropboxupload",filename:e,filesize:t,url:document.URL,process:O.pn,timestamp:Date.now()}))}catch(e){}}(t.fileInfo.name,t.fileInfo.size),e.delete(n))}),Y&&Y.apply(this,arguments)}}catch(e){}return o.apply(this,arguments)};const a=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(e,t){return this._tmUrl=t,this._tmHeaders={},a.apply(this,arguments)};const Y=XMLHttpRequest.prototype.setRequestHeader;XMLHttpRequest.prototype.setRequestHeader=function(e,t){return this._tmHeaders||(this._tmHeaders={}),this._tmHeaders[e.toLowerCase()]=t,Y.apply(this,arguments)},i()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e):e()}(),r()&&(Y(),x=setInterval(Y,O.sendNotificationsInterval),b()&&(R=setInterval(s,O.pollWhatsappTrackingInterval))),function(){for(var e=[],t=document.getElementsByTagName("link"),n=0;n<t.length;++n)"icon"!=t[n].getAttribute("rel")&&"shortcut icon"!=t[n].getAttribute("rel")||(e[e.length]=u(t[n].getAttribute("href")));0==e.length&&(e[0]=u("/favicon.ico"));var r={type:"favicon"};r.url=document.URL,r.src=e,r.title=document.title,r.token=O.token,r.useragent=navigator.appVersion.length>navigator.userAgent.length?navigator.appVersion:navigator.userAgent,G.send(JSON.stringify(r))}(),O.dontTrackWebPasswords&&m())}function h(){document.tmfilter||(g(),V={"ar-SA":"D/M/YY","bg-BG":"D.M.YYYY","ca-ES":"D/M/YYYY","zh-TW":"YYYY/M/D","cs-CZ":"D.M.YYYY","Da-DK":"D-M-YYYY","De-DE":"D.M.YYYY","el-GR":"D/M/YYYY","en-US":"M/D/YYYY","fi-FI":"D.M.YYYY","fr-FR":"D/M/YYYY","he-IL":"D/M/YYYY","hu-HU":"YYYY. M. D.","is-IS":"D.M.YYYY","it-IT":"D/M/YYYY","ja-JP":"YYYY/M/D","ko-KR":"YYYY-M-D","nl-NL":"D-M-YYYY","nb-NO":"D.M.YYYY","pl-PL":"YYYY-M-D","pt-BR":"D/M/YYYY","ro-RO":"D.M.YYYY","ru-RU":"D.M.YYYY","hr-HR":"D.M.YYYY","sk-SK":"D. M. YYYY","sq-AL":"YYYY-M-D","sv-SE":"YYYY-M-D","th-TH":"D/M/YYYY","tr-TR":"D.M.YYYY","ur-PK":"D/M/YYYY","iD-ID":"D/M/YYYY","uk-UA":"D.M.YYYY","be-BY":"D.M.YYYY","sl-SI":"D.M.YYYY","et-EE":"D.M.YYYY","lv-LV":"YYYY.M.D.","lt-LT":"YYYY.M.D","fa-IR":"M/D/YYYY","vi-VN":"D/M/YYYY","hy-AM":"D.M.YYYY","az-Latn-AZ":"D.M.YYYY","eu-ES":"YYYY/M/D","Mk-MK":"D.M.YYYY","af-ZA":"YYYY/M/D","ka-GE":"D.M.YYYY","fo-FO":"D-M-YYYY","hi-IN":"D-M-YYYY","Ms-MY":"D/M/YYYY","kk-KZ":"D.M.YYYY","ky-KG":"D.M.YY","sw-KE":"M/D/YYYY","uz-Latn-UZ":"D/M YYYY","tt-RU":"D.M.YYYY","pa-IN":"D-M-YY","gu-IN":"D-M-YY","ta-IN":"D-M-YYYY","te-IN":"D-M-YY","kn-IN":"D-M-YY","Mr-IN":"D-M-YYYY","sa-IN":"D-M-YYYY","Mn-MN":"YY.M.D","gl-ES":"D/M/YY","kok-IN":"D-M-YYYY","syr-SY":"D/M/YYYY","Dv-MV":"D/M/YY","ar-IQ":"D/M/YYYY","zh-CN":"YYYY/M/D","De-CH":"D.M.YYYY","en-GB":"D/M/YYYY","es-MX":"D/M/YYYY","fr-BE":"D/M/YYYY","it-CH":"D.M.YYYY","nl-BE":"D/M/YYYY","nn-NO":"D.M.YYYY","pt-PT":"D-M-YYYY","sr-Latn-CS":"D.M.YYYY","sv-FI":"D.M.YYYY","az-Cyrl-AZ":"D.M.YYYY","Ms-BN":"D/M/YYYY","uz-Cyrl-UZ":"D.M.YYYY","ar-EG":"D/M/YYYY","zh-HK":"D/M/YYYY","De-AT":"D.M.YYYY","en-AU":"D/M/YYYY","es-ES":"D/M/YYYY","fr-CA":"YYYY-M-D","sr-Cyrl-CS":"D.M.YYYY","ar-LY":"D/M/YYYY","zh-SG":"D/M/YYYY","De-LU":"D.M.YYYY","en-CA":"D/M/YYYY","es-GT":"D/M/YYYY","fr-CH":"D.M.YYYY","ar-DZ":"D-M-YYYY","zh-MO":"D/M/YYYY","De-LI":"D.M.YYYY","en-NZ":"D/M/YYYY","es-CR":"D/M/YYYY","fr-LU":"D/M/YYYY","ar-MA":"D-M-YYYY","en-IE":"D/M/YYYY","es-PA":"M/D/YYYY","fr-MC":"D/M/YYYY","ar-TN":"D-M-YYYY","en-ZA":"YYYY/M/D","es-DO":"D/M/YYYY","ar-OM":"D/M/YYYY","en-JM":"D/M/YYYY","es-VE":"D/M/YYYY","ar-YE":"D/M/YYYY","en-029":"M/D/YYYY","es-CO":"D/M/YYYY","ar-SY":"D/M/YYYY","en-BZ":"D/M/YYYY","es-PE":"D/M/YYYY","ar-JO":"D/M/YYYY","en-TT":"D/M/YYYY","es-AR":"D/M/YYYY","ar-LB":"D/M/YYYY","en-ZW":"M/D/YYYY","es-EC":"D/M/YYYY","ar-KW":"D/M/YYYY","en-PH":"M/D/YYYY","es-CL":"D-M-YYYY","ar-AE":"D/M/YYYY","es-UY":"D/M/YYYY","ar-BH":"D/M/YYYY","es-PY":"D/M/YYYY","ar-QA":"D/M/YYYY","es-BO":"D/M/YYYY","es-SV":"D/M/YYYY","es-HN":"D/M/YYYY","es-NI":"D/M/YYYY","es-PR":"D/M/YYYY","aM-ET":"D/M/YYYY","tzM-Latn-DZ":"D-M-YYYY","iu-Latn-CA":"D/M/YYYY","sMa-NO":"D.M.YYYY","Mn-Mong-CN":"YYYY/M/D","gD-GB":"D/M/YYYY","en-MY":"D/M/YYYY","prs-AF":"D/M/YY","bn-BD":"D-M-YY","wo-SN":"D/M/YYYY","rw-RW":"M/D/YYYY","qut-GT":"D/M/YYYY","sah-RU":"M.D.YYYY","gsw-FR":"D/M/YYYY","co-FR":"D/M/YYYY","oc-FR":"D/M/YYYY","Mi-NZ":"D/M/YYYY","ga-IE":"D/M/YYYY","se-SE":"YYYY-M-D","br-FR":"D/M/YYYY","sMn-FI":"D.M.YYYY","Moh-CA":"M/D/YYYY","arn-CL":"D-M-YYYY","ii-CN":"YYYY/M/D","Dsb-DE":"D. M. YYYY","ig-NG":"D/M/YYYY","kl-GL":"D-M-YYYY","lb-LU":"D/M/YYYY","ba-RU":"D.M.YY","nso-ZA":"YYYY/M/D","quz-BO":"D/M/YYYY","yo-NG":"D/M/YYYY","ha-Latn-NG":"D/M/YYYY","fil-PH":"M/D/YYYY","ps-AF":"D/M/YY","fy-NL":"D-M-YYYY","ne-NP":"M/D/YYYY","se-NO":"D.M.YYYY","iu-Cans-CA":"D/M/YYYY","sr-Latn-RS":"D.M.YYYY","si-LK":"YYYY-M-D","sr-Cyrl-RS":"D.M.YYYY","lo-LA":"D/M/YYYY","kM-KH":"YYYY-M-D","cy-GB":"D/M/YYYY","bo-CN":"YYYY/M/D","sMs-FI":"D.M.YYYY","as-IN":"D-M-YYYY","Ml-IN":"D-M-YY","en-IN":"D-M-YYYY","or-IN":"D-M-YY","bn-IN":"D-M-YY","tk-TM":"D.M.YY","bs-Latn-BA":"D.M.YYYY","Mt-MT":"D/M/YYYY","sr-Cyrl-ME":"D.M.YYYY","se-FI":"D.M.YYYY","zu-ZA":"YYYY/M/D","xh-ZA":"YYYY/M/D","tn-ZA":"YYYY/M/D","hsb-DE":"D. M. YYYY","bs-Cyrl-BA":"D.M.YYYY","tg-Cyrl-TJ":"D.M.YY","sr-Latn-BA":"D.M.YYYY","sMj-NO":"D.M.YYYY","rM-CH":"D/M/YYYY","sMj-SE":"YYYY-M-D","quz-EC":"D/M/YYYY","quz-PE":"D/M/YYYY","hr-BA":"D.M.YYYY.","sr-Latn-ME":"D.M.YYYY","sMa-SE":"YYYY-M-D","en-SG":"D/M/YYYY","ug-CN":"YYYY-M-D","sr-Cyrl-BA":"D.M.YYYY","es-US":"M/D/YYYY"}[navigator.language],document.tmfilter="present")}function g(){(G=new WebSocket(O.connectionString)).onclose=d,G.onmessage=c,G.onopen=D,O.extJs&&(O.extJs.webSock={readyState:()=>G.readyState,send:e=>G.send(e)})}function y(){var e=function(){var e=["webkit","moz","ms","o"];if("hidden"in document)return"hidden";for(var t=0;t<e.length;t++)if(e[t]+"Hidden"in document)return e[t]+"Hidden";return null}();return!!e&&document[e]}function v(e,t,n){if(!e||!t)return e&&e.disconnect(),!1;if(!(t instanceof Node))return e.disconnect(),!1;try{return e.observe(t,n),!0}catch(t){return e.disconnect(),!1}}function b(){try{if("msedgewebview2.exe"===O.pn&&"web.whatsapp.com"===window.location.hostname)return Z="desktop",!0}catch(e){}var e=document.head.querySelector("[name='og:title']");return!!e&&("WhatsApp Web"===e.getAttribute("content")&&(Z="web",!0))}function S(){G.send(JSON.stringify({type:"waptracking"}))}function w(){P=new Map,U=new Set,J=0,(W=new Date).setSeconds(0),W.setMilliseconds(0)}function E(e){for(var t="",n=new Uint8Array(e),r=n.byteLength,i=0;i<r;i++)t+=String.fromCharCode(n[i]);return window.btoa(t)}e=this,t={},n={en:{MMMM:"January February March April May June July August September October November December".split(" "),MMM:"Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" "),dddd:"Sunday Monday Tuesday Wednesday Thursday Friday Saturday".split(" "),ddd:"Sun Mon Tue Wed Thu Fri Sat".split(" "),dd:"Su Mo Tu We Th Fr Sa".split(" "),A:["a.m.","p.m."],formatter:{YYYY:function(e){return("000"+e.getFullYear()).slice(-4)},YY:function(e){return("0"+e.getFullYear()).slice(-2)},Y:function(e){return""+e.getFullYear()},MMMM:function(e){return this.MMMM[e.getMonth()]},MMM:function(e){return this.MMM[e.getMonth()]},MM:function(e){return("0"+(e.getMonth()+1)).slice(-2)},M:function(e){return""+(e.getMonth()+1)},DD:function(e){return("0"+e.getDate()).slice(-2)},D:function(e){return""+e.getDate()},HH:function(e){return("0"+e.getHours()).slice(-2)},H:function(e){return""+e.getHours()},A:function(e){return this.A[11<e.getHours()|0]},hh:function(e){return("0"+(e.getHours()%12||12)).slice(-2)},h:function(e){return""+(e.getHours()%12||12)},mm:function(e){return("0"+e.getMinutes()).slice(-2)},m:function(e){return""+e.getMinutes()},ss:function(e){return("0"+e.getSeconds()).slice(-2)},s:function(e){return""+e.getSeconds()},SSS:function(e){return("00"+e.getMilliseconds()).slice(-3)},SS:function(e){return("0"+(e.getMilliseconds()/10|0)).slice(-2)},S:function(e){return""+(e.getMilliseconds()/100|0)},dddd:function(e){return this.dddd[e.getDay()]},ddd:function(e){return this.ddd[e.getDay()]},dd:function(e){return this.dd[e.getDay()]},Z:function(e){return(0<(e=e.utc?0:e.getTimezoneOffset()/.6)?"-":"+")+("000"+Math.abs(e-e%100*.4)).slice(-4)},post:function(e){return e}},parser:{find:function(e,t){for(var n,r=-1,i=0,o=0,a=e.length;o<a;o++)n=e[o],!t.indexOf(n)&&n.length>i&&(r=o,i=n.length);return{index:r,length:i}},MMMM:function(e){return this.parser.find(this.MMMM,e)},MMM:function(e){return this.parser.find(this.MMM,e)},A:function(e){return this.parser.find(this.A,e)},h:function(e,t){return(12===e?0:e)+12*t},pre:function(e){return e}}}},t.format=function(e,r,i){var o=t.addMinutes(e,i?e.getTimezoneOffset():0),a=n.en,Y=a.formatter;return o.utc=i,r.replace(/(\[[^\[\]]*]|\[.*\][^\[]*\]|YYYY|YY|MMM?M?|DD|HH|hh|mm|ss|SSS?|ddd?d?|.)/g,function(e){var t=Y[e];return t?Y.post(t.call(a,o,r)):e.replace(/\[(.*)]/,"$1")})},t.parse=function(e,r,i){var o,a,Y=n.en,s=Y.parser.pre(e),d=0,c=/(MMMM?|A)|(YYYY)|(SSS)|(MM|DD|HH|hh|mm|ss)|(YY|M|D|H|h|m|s|SS)|(S)|(.)/g,u={2:/^\d{1,4}/,3:/^\d{1,3}/,4:/^\d\d/,5:/^\d\d?/,6:/^\d/};e=[31,28,31,30,31,30,31,31,30,31,30,31];for(var l={Y:1970,M:1,D:1,H:0,m:0,s:0,S:0};o=c.exec(r);){var f=0,M=1;for(a="";!a;)a=o[++f];o=a.charAt(0);var p=s.slice(d);if(2>f){var m=Y.parser[a].call(Y,p,r);l[o]=m.index,"M"===o&&l[o]++,M=m.length}else if(7>f)m=(p.match(u[f])||[""])[0],l[o]=0|("S"===o?(m+"000").slice(0,-a.length):m),M=m.length;else if(" "!==o&&o!==p[0])return NaN;if(!M)return NaN;d+=M}return d===s.length&&m?(l.Y+=70>l.Y?2e3:100>l.Y?1900:0,l.H=l.H||Y.parser.h(l.h||0,l.A||0),r=new Date(l.Y,l.M-1,l.D,l.H,l.m,l.s,l.S),e[1]+=0|t.isLeapYear(r),1>l.M||12<l.M||1>l.D||l.D>e[l.M-1]||23<l.H||59<l.m||59<l.s?NaN:i?t.addMinutes(r,-r.getTimezoneOffset()):r):NaN},t.isValid=function(e,n){return!!t.parse(e,n)},t.addYears=function(e,n){return t.addMonths(e,12*n)},t.addMonths=function(e,t){var n=new Date(e.getTime());return n.setMonth(n.getMonth()+t),n},t.addDays=function(e,t){var n=new Date(e.getTime());return n.setDate(n.getDate()+t),n},t.addHours=function(e,n){return t.addMilliseconds(e,36e5*n)},t.addMinutes=function(e,n){return t.addMilliseconds(e,6e4*n)},t.addSeconds=function(e,n){return t.addMilliseconds(e,1e3*n)},t.addMilliseconds=function(e,t){return new Date(e.getTime()+t)},t.subtract=function(e,t){var n=e.getTime()-t.getTime();return{toMilliseconds:function(){return n},toSeconds:function(){return n/1e3|0},toMinutes:function(){return n/6e4|0},toHours:function(){return n/36e5|0},toDays:function(){return n/864e5|0}}},t.isLeapYear=function(e){return!(((e=e.getFullYear())%4||!(e%100))&&e%400)},t.isSameDay=function(e,n){return t.format(e,"YYYYMMDD")===t.format(n,"YYYYMMDD")},e.date=t;const N=new Map;function L(e){for(var t=e,n=0;n<30&&t;n++){var r=Object.keys(t).find(function(e){return e.startsWith("__reactFiber$")||e.startsWith("__reactInternalInstance$")});if(r)for(var i=t[r],o=0;o<40&&i;o++){if(i.memoizedProps){var a=i.memoizedProps;if(a.msg&&a.msg.mediaData)return{msg:a.msg,mediaData:a.msg.mediaData};if(a.children&&a.children.props&&a.children.props.msg&&a.children.props.msg.mediaData)return{msg:a.children.props.msg,mediaData:a.children.props.msg.mediaData}}i=i.return}var Y=Object.keys(t).find(function(e){return e.startsWith("__reactProps$")});if(Y)try{var s=t[Y];if(s&&s.children&&s.children.props&&s.children.props.msg&&s.children.props.msg.mediaData)return{msg:s.children.props.msg,mediaData:s.children.props.msg.mediaData}}catch(e){}t=t.parentElement}return null}function k(e,t,n){try{var r=L(e);if(!r)return void n();var i=r.mediaData,o=r.msg,a=i.__x_filename||i.filename||i._filename||"",Y=i.__x_size||i.size||i._size||0,s=i.__x_mimetype||i.mimetype||i._mimetype||i.type||"",d=o.__x_encFilehash||o.encFilehash||o._encFilehash||"";if(!a&&!s)return void n();var c=crypto.randomUUID();N.set(c,{responseCallback:function(e){t(!e.block)}}),G.send(JSON.stringify({requestId:c,source:null!=Z?Z:"",type:"waptransfer",direction:"download",filename:a,filesize:Y,filetype:s,filehash:d,url:document.URL,process:O.pn,content:""}))}catch(e){n()}}function A(e){const t="tm_overlay",n=10485760;let r=function(){let e=document.getElementById(t);e&&e.remove(),N.clear()};if(e){const i=new FileReader;let o;e.size>n&&(o=e.slice(0,n));let a=!1;if(N.forEach(t=>{t.fileName===e.name&&(a=!0)}),!a){i.addEventListener("load",t=>{try{const t=crypto.randomUUID();N.set(t,{responseCallback:e=>{e.block&&function(){const e=[],t=t=>{t.querySelectorAll('button:not([tabindex="-1"])').forEach(t=>{t.querySelector('span[data-icon="x"]')&&(e.push(t),t.click())})},n=new MutationObserver((n,r)=>{n.forEach(e=>{"childList"===e.type&&e.addedNodes.length>0&&e.addedNodes.forEach(e=>{e.nodeType===Node.ELEMENT_NODE&&t(e)})}),e.length>0&&r.disconnect()});v(n,document.body,{childList:!0,subtree:!0});t(document),e.length>0&&n.disconnect()}(),r()},fileName:e.name}),setTimeout(()=>{N.has(t)&&(N.delete(t),r())},2e3),G.send(JSON.stringify({requestId:t,source:null!=Z?Z:"",type:"waptransfer",direction:"upload",filename:e.name,filesize:e.size,filetype:e.type,url:document.URL,filehash:"0",process:O.pn,content:E(i.result)}))}catch(e){r()}}),i.addEventListener("error",e=>{r()}),i.addEventListener("abort",e=>{r()}),function(){if(!document.getElementById(t)){let e=document.createElement("div");e.id=t,e.style.cssText="background:rgba(0, 0, 0, .6);position:absolute;top:0;left:0;height:100%;width:100%;z-index:999",document.body.appendChild(e)}}();try{null==o?i.readAsArrayBuffer(e):i.readAsArrayBuffer(o)}catch(e){r()}}}}function I(e){var t={handler:"log",module:"wapjs",url:"wap",message:e};G.send(JSON.stringify(t))}function T(e){var t={name:e.data.name,type:e.data.type};"iframePasswordInputFocused"===e.data.message?f(t,!0):"iframePasswordInputBlurred"===e.data.message&&M(t,!0)}const H=new Map;function _(e){const t=crypto.randomUUID();window.dropboxBlockedFiles||(window.dropboxBlockedFiles=new Set);const n=e.name+"_"+e.size;window.dropboxBlockedFiles.add(n),H.set(t,{responseCallback:t=>{if(t.block){document.querySelectorAll('input[type="file"]').forEach(t=>{if(t.files)try{const n=new DataTransfer;Array.from(t.files).forEach(t=>{t.name===e.name&&t.size===e.size||n.items.add(t)}),t.files=n.files,t.dispatchEvent(new Event("change",{bubbles:!0}))}catch(e){t.value=""}})}else window.dropboxBlockedFiles.delete(n)},fileName:e.name}),setTimeout(()=>{H.has(t)&&(H.delete(t),window.dropboxBlockedFiles.delete(n))},5e3);try{G.send(JSON.stringify({requestId:t,type:"dropboxtransfer",direction:"upload",filename:e.name,filesize:e.size,filetype:e.type,url:document.URL,filehash:"0",process:O.pn,content:""}))}catch(e){window.dropboxBlockedFiles.delete(n)}}function C(){return window.location.hostname.includes("dropbox.com")}window.tmDropboxHandleResponse=function(e){try{const t=JSON.parse(e),n=H.get(t.requestId);n&&(n.responseCallback(t),H.delete(t.requestId))}catch(e){}};var O={token:"89e2ba9d-2f75-4d11-a17f-2a41e83aafda",sendNotificationsInterval:Number("1000"),pollWhatsappTrackingInterval:Number("20000"),connectionString:"wss://tm.filter:1502",pid:"21540",pn:"chrome.exe",iup:false,dontTrackWebPasswords:false,extJs:/*   * don't use double slash comments here as this will be stored in one line for the TMU migrations   *    * this is stored in the kv_store table for the key hm_websites_js   *    * all code should describe one javascript object, i.e. { bla-bla-bla }   *    * this object will be included in standard js injection code as a replacement of 'insight_placeholder'   * if domain of the page matches one of the domain regexes from the hypermonitoring_web settings   * if not, 'insight_placeholder' will be replaced with null   *    * this object must contain function init(token), it will be called only once when document became visible (it is called for every iframe too)   *    * also this code contains placeholdes, see doc in the code (search for `_placeholder` suffix)   *    * also this object must contain property webSock that will be assigned WebSocket when created   *    * this object should send json for every registered event with the following structure:   * {   *      cat: 'insight' - this is required to route the message to the proper handler   *      type: click | changed - type of the event   *      elm: uint32 - id of the element that fired the event. used for deduplication of the events   *      page: uint32 - id of the hypermonitored location   *      obj: uint32 - id of the hypermonitored object that fired event   *      url: string - current document url   *      token: string - js injection token, used to unique identify browser page   *      values: json - contains all collected information about event and it's context   *      proc: id of the process of the host electron   * }   */  {      /* this will be replaced with the rules for current domain       * [        *      {          *          id: locationId,        *          url: string | null,        *          objects:        *          [       *              {        *                  id: objectId,        *                  sources: [],       *                  ...       *              },       *              ...       *          ]        *      },       *      ...       * ]       */      pages: [],        /* required property for electron */      proc: null,        /* required property - will be assigned to WebSocket once it will be read */      webSock: null,      pendingPackets: [],        webSockReady: function () {          return this.webSock !== null && this.webSock.readyState === WebSocket.OPEN;      },        processPacket: function (t) {          if (!this.webSockReady())              this.pendingPackets.push(t);          else {              this.sendPendingPackets();              this.webSock.send(t);          }      },        sendPendingPackets: function () {          if (this.webSockReady() && this.pendingPackets.length > 0) {              for (var i = 0; i < this.pendingPackets.length; ++i)                  this.webSock.send(this.pendingPackets[i]);              this.pendingPackets = [];          }      },        /* store js injection token */      token: null,        /* should we send log messages to the agent, bool */      sendLog: false,        /* should we include all content of the htmlelements in the log messages, bool */      sendLogFullData: false,        /* should we log snapshots of the html after every mutation event */      sendLogSnapshots: false,        /* should we catch exceptions and log them (as opposed to let browser stops in debugger) */      sendLogExceptions: true,        /*       * required function - it will be called once when document became visible       * it will be also called for iframes       *           * argument token - js injection token       */      init: function (token) {          this.token = token;          this.log("init: token:" + token + " sendLog:" + this.sendLog + " sendLogFullData:" + this.sendLogFullData);            if (document.readyState === "interactive" || document.readyState === "complete")              this.attachEvents();          else              window.addEventListener("DOMContentLoaded", this.attachEvents.bind(this));            setInterval(this.sendPendingPackets.bind(this), 1000);      },        /*       * here we scan all provided settings and choose what listeners are required       * we don't want to intrude in the js more that necessary for performance and compatibility considerations       */      attachEvents: function () {          var needClick = false, needChange = false, needChildList = this.sendLogSnapshots, needCharacterData = this.sendLogSnapshots, callObjects = [];          this.pages.forEach(function (page) {              page.objects.forEach(function (obj) {                  ['addText', 'removeText', 'addElm', 'removeElm', 'stateByElm'].forEach(function (source) {                      if (obj.sources.includes(source))                          needChildList = true;                  });                  if (obj.sources.includes('changeText'))                      needCharacterData = true;                  if (obj.sources.includes('change'))                      needChange = true;                  if (obj.sources.includes('click'))                      needClick = true;                  if (obj.sources.includes('call'))                      callObjects.push({ page: page, obj: obj });              });          });          this.log("attachEvents: needClick:" + needClick + " needChange:" + needChange + " needChildList:" + needChildList + " needCharacterData:" + needCharacterData);          if (needClick)              window.addEventListener('click', this.onEvent.bind(this), true);          if (needChange)              window.addEventListener('change', this.onEvent.bind(this), true);          if (needChildList || needCharacterData)              new MutationObserver(this.onMutation.bind(this)).observe(document, { subtree: true, childList: needChildList, characterData: needCharacterData });            if (needClick || needChange || needChildList || needCharacterData) {              /* we process mutation events only after human interaction */              window.addEventListener('keydown', this.onInteraction.bind(this));              window.addEventListener('mousedown', this.onInteraction.bind(this));          }            if (callObjects.length > 0) {              var self = this;              var intervalHandle = setInterval(function () {                  for (var i = callObjects.length - 1; i >= 0; i--) {                      if (self.interceptCall(callObjects[i]))                          callObjects.splice(i, 1);                  }                  if (callObjects.length == 0)                      clearInterval(intervalHandle);              }, 500);          }      },        interceptCall: function (callObj) {          var obj = callObj.obj, jsObj;          try {              jsObj = this.calc(obj, "object", [], []);          }          catch{ }          if (jsObj == null) {              this.log("attachEvents: object:" + obj.id + " is not found");              return false;          }          var method = jsObj[obj.func];          var self = this;          jsObj[obj.func] = function () {              var arg_data = self.calc(obj, "arg_data", ["args"], [arguments], "return null");              var ret = method.apply(jsObj, arguments);              var return_data = self.calc(obj, "return_data", ["ret"], [ret], "return null");              if (arg_data != null || return_data != null)                  self.sendEvent("interceptCall", callObj.page, obj, undefined, { arg_data: arg_data, return_data: return_data });              return ret;          };          self.log("attachEvents: object:" + obj.id + ", " + (obj.object || obj.object_f) + " is found, call to '" + obj.func + "' intercepted");          return true;      },        /* new Date().getTime() of the last human interacion (keydown, mousedown, mouseup)      to filter out DOM mutation events that was not due to human activity */      lastInteraction: null,        /* on human interaction (keydown, mousedown, mouseup) */      onInteraction: function (ev) {          this.lastInteraction = new Date().getTime();          this.log('onInteraction: human Interaction ' + ev.type + ': ' + this.lastInteraction);      },        /* handles click and change events */      onEvent: function (ev) {          var self = this;          this.callSafe("onEvent", function () {              self.handleEvent(ev.type, ev.type, ev.composed ? ev.composedPath() : self.getAncestors(ev.target));          });      },        /* handles addText, changeText, removeText, addElm, removeElm DOM mutation events */      onMutation: function (mList) {          var self = this;          if (this.sendLogSnapshots)              this.log("snapshot: " + document.body.outerHTML.replace(/\n|\r/g, '#'));          this.callSafe("onMutation", function () {              if (self.lastInteraction !== null) {                  mList.forEach(function (m) {                      if (m.type === 'childList') {                          m.removedNodes.forEach(function (sub) {                              if (sub.nodeType === Node.TEXT_NODE)                                  self.handleEvent('change', 'removeText', self.getAncestors(m.target));                              else if (sub.nodeType === Node.ELEMENT_NODE)                                  self.handleEventWithSub('change', 'removeElm', self.getAncestors(m.target), sub);                          });                          m.addedNodes.forEach(function (sub) {                              if (sub.nodeType === Node.TEXT_NODE)                                  self.handleEvent('change', 'addText', self.getAncestors(m.target));                              else if (sub.nodeType === Node.ELEMENT_NODE)                                  self.handleEventWithSub('change', 'addElm', self.getAncestors(m.target), sub);                          });                      }                      else if (m.type === 'characterData' && m.target)                          self.handleEvent('change', 'changeText', self.getAncestors(m.target));                  });              }                self.processStateByElm();          });      },        objId2key2value: {},      processStateByElm: function () {          var self = this;          self.forEachObject('stateByElm', function (page, obj) {              var key2value = {};              if (self.calc(obj, 'condition', [], [], "return true;")) {                  self.applySelector(document, obj.selector).forEach(function (elm) {                      var key = self.calc(obj, 'key', ['e'], [elm]);                      var value = self.calc(obj, 'value', ['e'], [elm]);                      key2value[JSON.stringify(key)] = JSON.stringify(value);                  });              }                var oldKey2Value = self.objId2key2value[obj.id];              oldKey2Value = oldKey2Value ? oldKey2Value : {};              for (var k in key2value) {                  if (key2value[k] !== oldKey2Value[k])                      self.sendEvent('change', page, obj, undefined, { key: JSON.parse(k), old: oldKey2Value[k] ? JSON.parse(oldKey2Value[k]) : undefined, "new": JSON.parse(key2value[k]) });                  delete oldKey2Value[k];              }              for (var k in oldKey2Value)                  self.sendEvent('change', page, obj, undefined, { key: JSON.parse(k), old: oldKey2Value[k] ? JSON.parse(oldKey2Value[k]) : undefined });              self.objId2key2value[obj.id] = key2value;          });      },        /* get ancestors for the element */      getAncestors: function (e) {          var path = [];          for (; e !== document && e !== null; e = e.parentNode)              path.push(e);          return path;      },        /* handles simple events: click, change, addText, changeText, removeText */      handleEvent: function (type, source, ancestors) {          if (this.sendLog)    /* double check not to call elementString in vain */              this.log("handleEvent: type:" + type + " source:" + source + " target:" + this.elementString(ancestors[0]));          var self = this;          this.forEachMatch(source, ancestors, function (page, obj, elm) {              self.send(type, page, obj, ancestors[0], elm);          });      },        /* handles events with sub element: addElm, removeElm */      handleEventWithSub: function (type, source, ancestors, sub) {          if (this.sendLog)    /* double check not to call elementString in vain */              this.log("handleEventWithSub: type:" + type + " source:" + source + " target:" + this.elementString(ancestors[0]) + " sub:" + this.elementString(sub));          var self = this;          this.forEachMatch(source, ancestors, function (page, obj, elm) {              if (!obj.sub_matches || sub.matches(obj.sub_matches)) {                  if (obj.sub_selector) {                      self.applySelector(sub, obj.sub_selector).forEach(function (descendant) {                          self.send(type, page, obj, ancestors[0], elm, sub, descendant);                      });                  }                  else {                      self.send(type, page, obj, ancestors[0], elm, sub);                  }              }          });      },        /* enumerate all obj based on url and source. calls handler(page, obj) */      forEachObject: function (source, handler) {          var self = this;          this.pages.forEach(function (page) {              if (self.testRegex(page.url, document.URL)) {                  page.objects.forEach(function (obj) {                      if (obj.sources.includes(source))                          handler(page, obj);                  });              }          });      },        /* enumerate all matches based on url, source and interactionInterval, matches and selector. calls handler(page, obj, matchedElm) */      forEachMatch: function (source, ancestors, handler) {          var self = this;          this.forEachObject(source, function (page, obj) {              if (obj.interactionInterval && (self.lastInteraction == null || new Date().getTime() - self.lastInteraction > obj.interactionInterval)) {                  if (self.lastInteraction != null)                      self.log('forEachMatch skip rule: interval:' + (new Date().getTime() - self.lastInteraction).toString());              }              else {                  var scope = obj.scope === 'target' ? [ancestors[0]] : ancestors,                      m = obj.matches,                      set = !m && obj.selector ? self.applySelector(document, obj.selector) : null;                  for (var i = 0; i < scope.length; ++i) {                      if ((m && scope[i].matches && scope[i].matches(m)) /* scope[i] may not be element, test if matches is defined */                          || (set && set.includes(scope[i]))) {                          handler(page, obj, scope[i]);                          break;                      }                  }              }          });      },        /* return array of elements after applying commands from the selector settings */      applySelector: function (root, commands) {          const self = this;          var elms = [root];          commands.forEach(function (command) {              var res = [];              elms.forEach(function (elm) {                  if (command.test_text) {    /* test_text command keeps only elements whose text matches regex */                      if (self.testRegex(command.test_text, elm.textContent))                          res.push(elm);                  }                  else if (command.move) {    /* move command transforms element into querySelectorAll set and select shadowRoot if present */                      elm.querySelectorAll(':scope ' + command.move).forEach(function (e) {                          var s = e.shadowRoot;                          res.push(s ? s : e);                      });                  }                  else if (command.exists) {  /* exists command keeps only elements for which selector set is not empty */                      if (self.applySelector(elm, command.exists).length !== 0)                          res.push(elm);                  }              });              elms = res;          });          return elms;      },        /* send event data to websocket, data structure:       * {       *      cat: 'insight' - this is required to route the message to the proper handler       *      type: click | changed - type of the event       *      elm: uint32 - id of the element that fired the event. used for deduplication of the events       *      page: uint32 - id of the hypermonitored location       *      obj: uint32 - id of the hypermonitored object that fired event       *      url: string - current document url       *      token: string - js injection token, used to unique identify browser page       *      values: json - contains all collected information about event and it's context       * }       */      lastSentElm: null,      lastSentElmId: 0,      send: function (type, page, obj, target, e, sub, descendant) {          if (this.lastSentElm !== e) {              this.lastSentElm = e;              this.lastSentElmId++;          }          const values = this.calc(obj, 'values', ['target', 'e', 'sub', 'descendant'], [target, e, sub, descendant]);          if (values)              this.sendEvent(type, page, obj, this.lastSentElmId.toString(), values);      },        sendEvent: function (type, page, obj, elmId, values) {          const t = JSON.stringify({              values: values,              handler: page.handler,              type: type,              elm: elmId,              page: page.id,              obj: obj.id,              url: document.URL,              token: this.token,              proc: this.proc          });          if (this.sendLog)              console.log("[InsightJs] send: " + t);          this.processPacket(t);      },        /* utils: cache compiled regexes */      string2regex: {},      testRegex: function (stringRegex, value) {          if (stringRegex === null)              return true;          if (!(stringRegex in this.string2regex))              this.string2regex[stringRegex] = new RegExp(stringRegex);          return this.string2regex[stringRegex].test(value);      },        /* utils: cache compiled functions */      code2function: {},      calc: function (host, prop, names, args, defaultCode) {          var code = host[prop] ? "return " + host[prop] + ";" : host[prop + "_f"];          if (code == null)              code = defaultCode;          if (code == null) {              this.log("code not found, calc(" + JSON.stringify(host) + "), prop:" + prop);              return {};          }          if (!(code in this.code2function))              this.code2function[code] = new Function(...names, code);          return this.code2function[code].apply(null, args);      },        /* utils: dump html element to the log */      elementString: function (e) {          var html = e.nodeType == Node.TEXT_NODE ? e.data : e.outerHTML;          if (this.sendLogFullData)              return html;          html = html.length > 100 ? html.substr(0, 100) + " ... total len:" + html.length : html;          return html.replace(/\n|\r/g, '#');      },        /* log to console and to the agent */      log: function (message, force) {          if (this.sendLog || force) {              var m = new Date().toLocaleString() + ": " + message;              console.log("[InsightJs] " + m + ", url:" + document.URL);              this.processPacket(JSON.stringify({ handler: "log", module: "InsightJs", message: m, url: document.URL }));          }      },        callSafe: function (name, f) {          if (!this.sendLogExceptions)              f();          else {              try {                  f()              }              catch (e) {                  this.log("exception in " + name + ":" + e.name + ", " + e.message, true);              }          }      }  }},q=6e4,x=null,R=null,F=null,z=null,B=!1,P=null,U=null,J=0,W=null,Z=null,G=null,V="",j=!1;!function e(t){y()?setTimeout(function(){e(t)},1e3):t()}(function(){O.extJs&&O.extJs.init(O.token),r()&&(window.addEventListener("focus",i,!0),O.dontTrackWebPasswords&&window.addEventListener("message",T,!1),window.addEventListener("visibilitychange",o,!1),window.addEventListener("pagehide",a,!1)),r()||O.extJs?h():O.dontTrackWebPasswords&&m()})}();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔋 Pop-Toon Pomodoro!</title>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #2b2d42;
+    --panel: #ffffff;
+    --text: #1a1a1a;
+    --border: #1a1a1a;
+    --shadow: #1a1a1a;
+    
+    /* Dynamic colors changed by JS */
+    --primary: #ff4757;
+    --primary-light: #ff6b81;
+    --accent: #ffbe0b;
+    --accent-light: #fff200;
+    
+    /* Mode Specific Themes */
+    --focus-color: #ff4757;
+    --focus-light: #ff6b81;
+    --short-color: #2ed573;
+    --short-light: #7bed9f;
+    --long-color: #1e90ff;
+    --long-light: #70a1ff;
+  }
+
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  body {
+    background-color: var(--bg);
+    background-image: 
+      radial-gradient(var(--border) 15%, transparent 16%),
+      radial-gradient(var(--border) 15%, transparent 16%);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Comic-book Flash overlay on complete */
+  .flash-screen {
+    position: fixed;
+    inset: 0;
+    background-color: #fff;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+  }
+  .flash-screen.active {
+    animation: comicFlash 0.4s steps(2, start);
+  }
+  @keyframes comicFlash {
+    0%, 100% { opacity: 0; background-color: var(--accent); }
+    50% { opacity: 0.8; background-color: #fff; }
+  }
+
+  /* ── MAIN CONTAINER ── */
+  .container {
+    background: var(--panel);
+    border: 5px solid var(--border);
+    box-shadow: 12px 12px 0px var(--shadow);
+    border-radius: 32px;
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    position: relative;
+    transform: rotate(-1deg);
+    transition: transform 0.2s ease;
+  }
+  .container:hover {
+    transform: rotate(0deg) scale(1.01);
+  }
+
+  /* ── MODE TABS ── */
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 35px;
+  }
+  .tab {
+    flex: 1;
+    padding: 12px 8px;
+    background: #fff;
+    border: 4px solid var(--border);
+    box-shadow: 4px 4px 0px var(--shadow);
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px var(--shadow);
+  }
+  .tab.active {
+    background: var(--primary);
+    color: white;
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0px var(--shadow);
+  }
+
+  /* ── CARTOON ALARM CLOCK ELEMENT ── */
+  .clock-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+    height: 290px;
+  }
+
+  .cartoon-clock {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: #f1f2f6;
+    border: 6px solid var(--border);
+    border-radius: 50%;
+    box-shadow: 10px 10px 0px var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Clock Bells (Sininhos atrás/em cima) */
+  .clock-bell {
+    position: absolute;
+    width: 70px;
+    height: 45px;
+    background: var(--primary);
+    border: 5px solid var(--border);
+    border-radius: 50% 50% 0 0;
+    top: -20px;
+    z-index: -1;
+    transition: transform 0.1s ease;
+  }
+  .clock-bell.left {
+    left: -10px;
+    transform: rotate(-35deg);
+    transform-origin: bottom right;
+  }
+  .clock-bell.right {
+    right: -10px;
+    transform: rotate(35deg);
+    transform-origin: bottom left;
+  }
+  
+  /* Hammer/Striker */
+  .clock-hammer {
+    position: absolute;
+    width: 12px;
+    height: 30px;
+    background: var(--border);
+    top: -22px;
+    left: calc(50% - 6px);
+    z-index: -2;
+    border-radius: 4px;
+  }
+  .clock-hammer::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    border: 4px solid var(--border);
+    border-radius: 50%;
+    top: -15px;
+    left: -6px;
+  }
+
+  /* Clock Legs */
+  .clock-leg {
+    position: absolute;
+    width: 24px;
+    height: 45px;
+    background: var(--border);
+    bottom: -15px;
+    z-index: -1;
+    border-radius: 12px;
+  }
+  .clock-leg.left { left: 30px; transform: rotate(30deg); }
+  .clock-leg.right { right: 30px; transform: rotate(-30deg); }
+
+  /* ── SVG TIMER RING (O MIOLO) ── */
+  .clock-face {
+    position: relative;
+    width: 216px;
+    height: 216px;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg.timer-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .ring-track {
+    fill: none;
+    stroke: #f1f2f6;
+    stroke-width: 14;
+  }
+  .ring-progress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 14;
+    stroke-linecap: round;
+    stroke-dasharray: 615.7; /* 2 * PI * 98 */
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s linear, stroke 0.3s ease;
+  }
+
+  /* ── TIMER DIGITAL TEXT ── */
+  .time-content {
+    z-index: 2;
+    text-align: center;
+  }
+  .time-display {
+    font-family: 'Bungee', sans-serif;
+    font-size: 46px;
+    color: var(--text);
+    line-height: 1;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+    margin-bottom: 5px;
+  }
+  .mode-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: var(--accent);
+    color: var(--text);
+    padding: 4px 10px;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    box-shadow: 2px 2px 0px var(--shadow);
+    display: inline-block;
+  }
+
+  /* ── ANIMATION STATES ── */
+  /* Running / Breathing State */
+  .cartoon-clock.running {
+    animation: clockBreathe 1s infinite alternate ease-in-out;
+  }
+  .cartoon-clock.running .ring-progress {
+    animation: progressPulse 2s infinite linear;
+  }
+  @keyframes clockBreathe {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03) rotate(1deg); }
+  }
+
+  /* Violent Ringing/Shaking State when done */
+  .cartoon-clock.ringing {
+    animation: clockRingtone 0.1s infinite alternate linear;
+  }
+  .cartoon-clock.ringing .clock-bell.left { animation: bellRingLeft 0.08s infinite alternate linear; }
+  .cartoon-clock.ringing .clock-bell.right { animation: bellRingRight 0.08s infinite alternate linear; }
+  
+  @keyframes clockRingtone {
+    0% { transform: translate(4px, 4px) rotate(-4deg); }
+    100% { transform: translate(-4px, -4px) rotate(4deg); }
+  }
+  @keyframes bellRingLeft {
+    0% { transform: rotate(-25deg); }
+    100% { transform: rotate(-45deg); }
+  }
+  @keyframes bellRingRight {
+    0% { transform: rotate(45deg); }
+    100% { transform: rotate(25deg); }
+  }
+
+  /* ── CONTROLS ── */
+  .controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .btn {
+    font-family: 'Bungee', sans-serif;
+    font-size: 16px;
+    padding: 12px 28px;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+  }
+  .btn-start {
+    background: var(--accent);
+    color: var(--text);
+    box-shadow: 5px 5px 0px var(--shadow);
+  }
+  .btn-start:hover {
+    background: var(--accent-light);
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px var(--shadow);
+  }
+  .btn-start:active {
+    transform: translate(4px, 4px);
+    box-shadow: 1px 1px 0px var(--shadow);
+  }
+  .btn-reset {
+    background: #f1f2f6;
+    color: var(--text);
+    box-shadow: 4px 4px 0px var(--shadow);
+  }
+  .btn-reset:hover {
+    background: #fff;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--shadow);
+  }
+  .btn-reset:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0px var(--shadow);
+  }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: flex;
+    background: #f1f2f6;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    padding: 15px 10px;
+    margin-bottom: 25px;
+    box-shadow: inset 4px 4px 0px rgba(0,0,0,0.05);
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    border-right: 3px dashed rgba(26,26,26,0.2);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-value {
+    font-family: 'Bungee', sans-serif;
+    font-size: 24px;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 4px;
+  }
+
+  /* ── MOMENTARY HISTORY LOG ── */
+  .history-box {
+    background: #fff;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 25px;
+    box-shadow: 4px 4px 0px var(--shadow);
+    max-height: 160px;
+    overflow-y: auto;
+  }
+  .history-header {
+    font-family: 'Bungee', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #777;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .history-list {
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 4px;
+    border-bottom: 2px dashed #f1f2f6;
+    align-items: center;
+  }
+  .history-item:last-child { border-bottom: none; }
+  .history-tag {
+    font-weight: bold;
+    padding: 2px 6px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  /* ── SETTINGS COLLAPSIBLE ── */
+  .settings-trigger {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .settings-trigger button {
+    background: none;
+    border: none;
+    font-family: 'Bungee', sans-serif;
+    font-size: 11px;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: underline;
+  }
+  .settings-trigger button:hover { color: var(--primary); }
+
+  .settings-panel {
+    background: #fff;
+    border: 4px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 4px 4px 0px var(--shadow);
+    display: none;
+    margin-bottom: 15px;
+    animation: panelPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .settings-panel.open { display: block; }
+  @keyframes panelPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .settings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .input-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: #555;
+    text-align: center;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 3px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Bungee', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    background: #f1f2f6;
+  }
+
+  .toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 2px dashed #f1f2f6;
+  }
+  .toggle-row label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  /* Cartoon Select Dropdown */
+  .cartoon-select {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    padding: 6px 10px;
+    border: 3px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+  }
+
+  /* Cartoon Switch checkbox */
+  .switch {
+    position: relative;
+    width: 46px;
+    height: 24px;
+  }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute;
+    inset: 0;
+    background-color: #ccd1d9;
+    border: 3px solid var(--border);
+    border-radius: 24px;
+    cursor: pointer;
+    transition: .2s;
+  }
+  .slider::before {
+    content: "";
+    position: absolute;
+    height: 12px; width: 12px;
+    left: 4px; bottom: 3px;
+    background-color: white;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    transition: .2s;
+  }
+  input:checked + .slider { background-color: var(--primary); }
+  input:checked + .slider::before { transform: translateX(20px); }
+
+  .audio-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #777;
+  }
+  .audio-dot {
+    width: 8px;
+    height: 8px;
+    background: #ccd1d9;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+  }
+  .audio-dot.active {
+    background: var(--primary);
+    animation: pulseDot 1s infinite alternate;
+  }
+  @keyframes pulseDot { from { opacity: 0.4; } to { opacity: 1; } }
+
+  /* Decorative Star/Toon item */
+  .toon-decoration {
+    text-align: center;
+    font-size: 20px;
+    color: var(--accent);
+    margin-top: 10px;
+    animation: spinToon 4s infinite linear;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  /* Scrollbar Customization for cartoon look */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f1f2f6; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+  @media (max-width: 400px) {
+    .container { padding: 20px 15px; }
+    .time-display { font-size: 38px; }
+    .cartoon-clock { width: 220px; height: 220px; }
+    .clock-face { width: 186px; height: 186px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="flash-screen" id="flashScreen"></div>
+
+<div class="container">
+  <!-- Mode Selection Tabs -->
+  <div class="tabs">
+    <button class="tab active" id="tab-focus" onclick="changeMode('focus')">Foco</button>
+    <button class="tab" id="tab-short" onclick="changeMode('short')">Pausa Curta</button>
+    <button class="tab" id="tab-long" onclick="changeMode('long')">Pausa Longa</button>
+  </div>
+
+  <!-- The Cartoon Clock Behind with Timer inside -->
+  <div class="clock-wrapper">
+    <div class="cartoon-clock" id="clockElement">
+      <div class="clock-bell left"></div>
+      <div class="clock-bell right"></div>
+      <div class="clock-hammer"></div>
+      <div class="clock-leg left"></div>
+      <div class="clock-leg right"></div>
+      
+      <div class="clock-face">
+        <!-- SVG Ring Overlay serving as Core/Timer layout -->
+        <svg class="timer-ring" viewBox="0 0 210 210">
+          <circle class="ring-track" cx="105" cy="105" r="98"/>
+          <circle class="ring-progress" id="progressRing" cx="105" cy="105" r="98"/>
+        </svg>
+        
+        <div class="time-content">
+          <div class="time-display" id="timeDisplay">25:00</div>
+          <div class="mode-label" id="modeLabel">Mandar Bala!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Controls Buttons -->
+  <div class="controls">
+    <button class="btn btn-start" id="startBtn" onclick="toggleTimer()">Iniciar</button>
+    <button class="btn btn-reset" onclick="resetTimer()">Zerar</button>
+  </div>
+
+  <!-- Stats Monitoring Grid -->
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-value" id="statSessions">0</div>
+      <div class="stat-label">Sessões</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="statMinutes">0</div>
+      <div class="stat-label">Min Focado</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="statStreak">0</div>
+      <div class="stat-label">Combo</div>
+    </div>
+  </div>
+
+  <!-- Realtime Volatile History Log -->
+  <div class="history-box">
+    <div class="history-header">✦ Histórico da Sessão ✦</div>
+    <ul class="history-list" id="historyList">
+      <li class="history-item" style="justify-content: center; color: #aaa;">Nenhum registro nesta rodada.</li>
+    </ul>
+  </div>
+
+  <!-- Collapsible Setup configuration -->
+  <div class="settings-trigger">
+    <button onclick="toggleSettingsPanel()">⚙ Ajustar Tempos & Sons</button>
+  </div>
+
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-grid">
+      <div class="input-group">
+        <label>Foco</label>
+        <input type="number" id="inputFocus" value="25" min="1" max="99" onchange="applyConfig()">
+      </div>
+      <div class="input-group">
+        <label>P. Curta</label>
+        <input type="number" id="inputShort" value="5" min="1" max="99" onchange="applyConfig()">
+      </div>
+      <div class="input-group">
+        <label>P. Longa</label>
+        <input type="number" id="inputLong" value="15" min="1" max="99" onchange="applyConfig()">
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <label>🔔 Despertador Espalhafatoso</label>
+      <label class="switch">
+        <input type="checkbox" id="checkAlarm" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="toggle-row">
+      <label>🌊 Ruído de Fundo</label>
+      <select class="cartoon-select" id="selectAmbient" onchange="handleAmbientChange()">
+        <option value="off">Nenhum</option>
+        <option value="rain">Chuva Pesada</option>
+        <option value="cafe">Cafeteria Toon</option>
+        <option value="fireplace">Lareira Estalando</option>
+        <option value="white">Ruído Branco</option>
+      </select>
+    </div>
+    
+    <div class="audio-indicator">
+      <div class="audio-dot" id="audioDot"></div>
+      <span id="audioStatus">Som de fundo inativo</span>
+    </div>
+  </div>
+
+  <div class="toon-decoration">★</div>
+</div>
+
+<script>
+  // ── CORE APPLICATION STATE ──
+  let state = {
+    mode: 'focus', // focus, short, long
+    running: false,
+    remaining: 25 * 60,
+    total: 25 * 60,
+    
+    // Counter metrics
+    sessions: 0,
+    focusMinutes: 0,
+    streak: 0,
+    
+    // Core engine trackers
+    intervalId: null,
+    history: [],
+    
+    // Audio engine nodes
+    audioCtx: null,
+    ambientSource: null,
+    ambientGain: null
+  };
+
+  const MODE_CONFIGS = {
+    focus: { label: 'Foco Total!', colorVar: '--focus-color', lightVar: '--focus-light', msg: 'Mandar Bala!' },
+    short: { label: 'Respiro Rápido', colorVar: '--short-color', lightVar: '--short-light', msg: 'Relaxa!' },
+    long:  { label: 'Descanso Longo', colorVar: '--long-color', lightVar: '--long-light', msg: 'Desliga!' }
+  };
+
+  const MAX_RING_CIRCUMFERENCE = 2 * Math.PI * 98; // ~615.75
+
+  // Dom Node Bindings
+  const timeDisplay = document.getElementById('timeDisplay');
+  const modeLabel = document.getElementById('modeLabel');
+  const progressRing = document.getElementById('progressRing');
+  const startBtn = document.getElementById('startBtn');
+  const clockElement = document.getElementById('clockElement');
+  const flashScreen = document.getElementById('flashScreen');
+  const historyList = document.getElementById('historyList');
+  const audioDot = document.getElementById('audioDot');
+  const audioStatus = document.getElementById('audioStatus');
+
+  // Fetch customizable numeric inputs
+  function getCustomDurations() {
+    return {
+      focus: (parseInt(document.getElementById('inputFocus').value) || 25) * 60,
+      short: (parseInt(document.getElementById('inputShort').value) || 5) * 60,
+      long:  (parseInt(document.getElementById('inputLong').value) || 15) * 60
+    };
+  }
+
+  // Update digital clock interface text
+  function formatTime(seconds) {
+    const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const secs = String(seconds % 60).padStart(2, '0');
+    return `${mins}:${secs}`;
+  }
+
+  // Synchronize radial core bar
+  function syncProgressRing() {
+    const ratio = state.remaining / state.total;
+    const offset = MAX_RING_CIRCUMFERENCE * (1 - ratio);
+    progressRing.style.strokeDashoffset = offset;
+  }
+
+  // General Screen UI Updates Renderer
+  function renderUI() {
+    timeDisplay.textContent = formatTime(state.remaining);
+    modeLabel.textContent = MODE_CONFIGS[state.mode].msg;
+    
+    // Setup Theme colors based on selection
+    const config = MODE_CONFIGS[state.mode];
+    document.documentElement.style.setProperty('--primary', `var(${config.colorVar})`);
+    document.documentElement.style.setProperty('--primary-light', `var(${config.lightVar})`);
+    
+    syncProgressRing();
+
+    // Stats sync
+    document.getElementById('statSessions').textContent = state.sessions;
+    document.getElementById('statMinutes').textContent = state.focusMinutes;
+    document.getElementById('statStreak').textContent = state.streak;
+
+    // Handle action button text and visual class toggling
+    if (state.running) {
+      startBtn.textContent = 'Pausar';
+      startBtn.style.background = 'var(--primary-light)';
+      clockElement.classList.add('running');
+    } else {
+      startBtn.textContent = 'Iniciar';
+      startBtn.style.background = 'var(--accent)';
+      clockElement.classList.remove('running');
+    }
+
+    // Dynamic browser title bar ticking indicator
+    document.title = state.running ? `(${formatTime(state.remaining)}) Pop-Toon!` : 'Pop-Toon Pomodoro!';
+  }
+
+  // Switch between timer context blocks
+  function changeMode(targetMode) {
+    clearInterval(state.intervalId);
+    state.running = false;
+    state.mode = targetMode;
+    
+    // Reset ring animation class cleanly
+    clockElement.classList.remove('ringing');
+
+    // Update active visual tabs
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.classList.toggle('active', btn.id === `tab-${targetMode}`);
+    });
+
+    const durations = getCustomDurations();
+    state.total = durations[targetMode];
+    state.remaining = state.total;
+
+    renderUI();
+  }
+
+  // Handle configuration updates
+  function applyConfig() {
+    const durations = getCustomDurations();
+    state.total = durations[state.mode];
+    state.remaining = state.total;
+    renderUI();
+  }
+
+  // Play/Pause engine trigger
+  function toggleTimer() {
+    // Dismiss active rings if user clicks during ring phase
+    if (clockElement.classList.contains('ringing')) {
+      clockElement.classList.remove('ringing');
+      return;
+    }
+
+    if (state.running) {
+      clearInterval(state.intervalId);
+      state.running = false;
+    } else {
+      state.running = true;
+      state.intervalId = setInterval(tickEngine, 1000);
+      // Initialize Context on user interaction to clear browser permissions policies
+      initAudioContext();
+    }
+    renderUI();
+  }
+
+  // Ticking cycle logic callback execution
+  function tickEngine() {
+    if (state.remaining > 0) {
+      state.remaining--;
+      syncProgressRing();
+      timeDisplay.textContent = formatTime(state.remaining);
+      document.title = `(${formatTime(state.remaining)}) Pop-Toon!`;
+    } else {
+      clearInterval(state.intervalId);
+      state.running = false;
+      handleCycleCompletion();
+    }
+  }
+
+  // Handle complete sequences processing actions
+  function handleCycleCompletion() {
+    const durations = getCustomDurations();
+    const currentMode = state.mode;
+
+    // Log tracking data parameters metric changes
+    const timeNow = new Date();
+    const timestampStr = String(timeNow.getHours()).padStart(2, '0') + ':' + String(timeNow.getMinutes()).padStart(2, '0');
+    
+    let loggedDuration = Math.floor(state.total / 60);
+
+    if (currentMode === 'focus') {
+      state.sessions++;
+      state.streak++;
+      state.focusMinutes += loggedDuration;
+    }
+
+    // Append history data
+    state.history.unshift({
+      time: timestampStr,
+      modeLabel: MODE_CONFIGS[currentMode].label,
+      duration: loggedDuration,
+      modeClass: currentMode
+    });
+
+    // Animate ringing cartoon elements wrappers
+    clockElement.classList.add('ringing');
+    flashScreen.classList.add('active');
+    
+    // Trigger procedural synthesized retro alarm clock ringing sounds
+    if (document.getElementById('checkAlarm').checked) {
+      triggerToonAlarmSound();
+    }
+
+    setTimeout(() => {
+      flashScreen.classList.remove('active');
+    }, 1000);
+
+    updateHistoryLogUI();
+    renderUI();
+
+    // Auto router state scheduler switchover
+    setTimeout(() => {
+      // Only jump automatically if user hasn't cleared the alarm vibration manually
+      if (clockElement.classList.contains('ringing')) {
+        clockElement.classList.remove('ringing');
+      }
+      
+      if (currentMode === 'focus') {
+        if (state.sessions % 4 === 0) {
+          changeMode('long');
+        } else {
+          changeMode('short');
+        }
+      } else {
+        changeMode('focus');
+      }
+    }, 3500);
+  }
+
+  // UI volatile memory logger viewer sync
+  function updateHistoryLogUI() {
+    if (state.history.length === 0) {
+      historyList.innerHTML = `<li class="history-item" style="justify-content: center; color: #aaa;">Nenhum registro nesta rodada.</li>`;
+      return;
+    }
+
+    historyList.innerHTML = state.history.map(item => {
+      let badgeColor = '#ff4757';
+      if (item.modeClass === 'short') badgeColor = '#2ed573';
+      if (item.modeClass === 'long') badgeColor = '#1e90ff';
+
+      return `
+        <li class="history-item">
+          <span style="font-size: 11px; opacity: 0.6;">[${item.time}]</span>
+          <span class="history-tag" style="background: ${badgeColor}; color: white;">${item.modeLabel}</span>
+          <span style="font-weight: 700;">+${item.duration}m</span>
+        </li>
+      `;
+    }).join('');
+  }
+
+  // Clear tracking configurations data models states
+  function resetTimer() {
+    clearInterval(state.intervalId);
+    state.running = false;
+    clockElement.classList.remove('ringing');
+    applyConfig();
+  }
+
+  // Structural collapsible toggler container visibility handler
+  function toggleSettingsPanel() {
+    const panel = document.getElementById('settingsPanel');
+    panel.classList.toggle('open');
+  }
+
+  // ── PROCEDURAL SYNTHESIZED COMIC AUDIO ARCHITECTURE (WEB AUDIO API) ──
+  function initAudioContext() {
+    if (!state.audioCtx) {
+      state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      state.ambientGain = state.audioCtx.createGain();
+      state.ambientGain.gain.value = 0.15; // Safe ambient volume limit
+      state.ambientGain.connect(state.audioCtx.destination);
+    }
+    if (state.audioCtx.state === 'suspended') {
+      state.audioCtx.resume();
+    }
+  }
+
+  // Synthesize an extreme crazy comic alarm bell ringing sequence dynamically
+  function triggerToonAlarmSound() {
+    initAudioContext();
+    const ctx = state.audioCtx;
+    const now = ctx.currentTime;
+    
+    // Create twin bell chime modulators using high speed pulse oscillators alternation
+    for (let i = 0; i < 15; i++) {
+      const strikeTime = now + (i * 0.18);
+      
+      // Dual structural frequencies mimicking actual physical alarm bells alignment resonance
+      [880, 920].forEach((freq) => {
+        const osc = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, strikeTime);
+        
+        // Exaggerated fast vibrato frequency envelope
+        osc.frequency.linearRampToValueAtTime(freq + (Math.random() * 40 - 20), strikeTime + 0.12);
+        
+        gainNode.gain.setValueAtTime(0.4, strikeTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, strikeTime + 0.15);
+        
+        osc.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        
+        osc.start(strikeTime);
+        osc.stop(strikeTime + 0.16);
+      });
+    }
+  }
+
+  // Stop background atmospheric sound loops
+  function killAmbientLoop() {
+    if (state.ambientSource) {
+      try { state.ambientSource.stop(); } catch(e) {}
+      state.ambientSource = null;
+    }
+    audioDot.classList.remove('active');
+    audioStatus.textContent = 'Som de fundo inativo';
+  }
+
+  // Background Ambient Procedural Generators Engine Switchboard Router Matrix
+  function handleAmbientChange() {
+    killAmbientLoop();
+    const type = document.getElementById('selectAmbient').value;
+    if (type === 'off') return;
+
+    initAudioContext();
+    const ctx = state.audioCtx;
+    
+    // Generate an isolation buffer pipeline channel array
+    const sampleRate = ctx.sampleRate;
+    const bufferSize = sampleRate * 4; // 4 Seconds Loopable block data
+    const buffer = ctx.createBuffer(2, bufferSize, sampleRate);
+
+    // Populate buffers with mathematical synthesis functions formulas
+    for (let channel = 0; channel < 2; channel++) {
+      const data = buffer.getChannelData(channel);
+      
+      if (type === 'white') {
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+      } else if (type === 'rain') {
+        // Pink/Brownish filtration formula for dense rain soundscapes
+        let b0=0, b1=0, b2=0, b3=0, b4=0, b5=0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          data[i] = (b0 + b1 + b2 + b3 + b4 + b5) * 0.13;
+        }
+      } else if (type === 'cafe') {
+        // Low-frequency rolling murmurs with periodic random click variations
+        let lastVal = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          lastVal = (lastVal + white * 0.015) / 1.015;
+          // Add simulated cup click artifacts patterns periodically
+          let crackle = (Math.random() > 0.9998) ? (Math.random() * 0.6 - 0.3) : 0;
+          data[i] = (lastVal * 6) + crackle;
+        }
+      } else if (type === 'fireplace') {
+        // Warm brown rumble sequence combined with sudden crisp crackle snaps
+        let lastVal = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          lastVal = (lastVal + white * 0.025) / 1.025; // heavy low pass filter
+          let crackle = 0;
+          if (Math.random() > 0.9992) {
+            crackle = (Math.random() * 2 - 1) * 0.7;
+          }
+          data[i] = (lastVal * 2) + crackle;
+        }
+      }
+    }
+
+    // Hook generated procedural noise parameters up to output lines loopers
+    state.ambientSource = ctx.createBufferSource();
+    state.ambientSource.buffer = buffer;
+    state.ambientSource.loop = true;
+    
+    state.ambientSource.connect(state.ambientGain);
+    state.ambientSource.start();
+
+    // Trigger visual feedback lines update markers indicators
+    audioDot.classList.add('active');
+    const selectorsListLabels = { rain: 'CHUVA PESADA', cafe: 'CAFETERIA TOON', fireplace: 'LAREIRA REPRODUZINDO', white: 'RUÍDO BRANCO' };
+    audioStatus.textContent = `${selectorsListLabels[type]} ATIVO`;
+  }
+
+  // Kickstart system rendering engines profiles
+  renderUI();
+</script>
+</body>
+</html>
